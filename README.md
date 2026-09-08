@@ -63,8 +63,42 @@ Table definition
 ** Gives you table rows and type **
 ```DESCRIBE TABLE PROFILE_NYC_311.CROSS_SKILLING_NYC_311.NYC_311_DATASET; ```
 
+*** Important ***
+Set role , warehouse, database,schema
+use role SE_DE_PARTICIPANT;
+use warehouse SNOWFLAKE_LEARNING_WH
+use database PROFILE_NYC_311
+use schema CROSS_SKILLING_NYC_311
+
+
 ** Primary Key **
 SHOW PRIMARY KEYS IN TABLE PROFILE_NYC_311.CROSS_SKILLING_NYC_311.NYC_311_DATASET
 
-** Rows **
-27.0M Rows
+
+
+
+*** Status of ticket and count ***
+
+    In UI set the warehouse, database and schema
+    select count(*) , STATUS from NYC_311_DATASET group by STATUS;
+
+    249339 - in progress
+
+
+*** Count ***
+
+    In UI set the warehouse, database and schema
+    select count(*) from NYC_311_DATASET
+    27039784
+
+Earliest Date
+    2010-01-01
+
+```SELECT MIN(TO_DATE(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS UTC')) AS earliest_order FROM NYC_311_DATASET;```
+
+Max Date
+    2021-11-08
+
+    ```
+    SELECT MAX(TO_DATE(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS UTC')) AS earliest_order FROM NYC_311_DATASET;
+    ```
