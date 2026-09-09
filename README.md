@@ -102,3 +102,21 @@ Max Date
     ```
     SELECT MAX(TO_DATE(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS UTC')) AS earliest_order FROM NYC_311_DATASET;
     ```
+
+Create bucket with auto delete
+    ```
+        resource "google_storage_bucket" "auto_delete_bucket" {
+            name     = "my-unique-bucket-name"
+            location = "US"
+
+            # Automatically delete files older than 30 days
+            lifecycle_rule {
+                condition {
+                age = 30
+                }
+                action {
+                type = "Delete"
+                }
+            }
+        }
+    ```
