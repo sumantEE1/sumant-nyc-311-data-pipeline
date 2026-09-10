@@ -1,0 +1,37 @@
+[2026-09-10T09:10:53.418+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-10T09:10:53.425+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: gcs_copy_files.validate_config manual__2026-09-10T09:10:52.337883+00:00 [queued]>
+[2026-09-10T09:10:53.428+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: gcs_copy_files.validate_config manual__2026-09-10T09:10:52.337883+00:00 [queued]>
+[2026-09-10T09:10:53.428+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-10T09:10:53.433+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): validate_config> on 2026-09-10 09:10:52.337883+00:00
+[2026-09-10T09:10:53.436+0000] {standard_task_runner.py:64} INFO - Started process 184 to run task
+[2026-09-10T09:10:53.437+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'gcs_copy_files', 'validate_config', 'manual__2026-09-10T09:10:52.337883+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/gcs_copy_files.py', '--cfg-path', '/tmp/tmpwsri9prz']
+[2026-09-10T09:10:53.439+0000] {standard_task_runner.py:91} INFO - Job 27: Subtask validate_config
+[2026-09-10T09:10:53.469+0000] {task_command.py:426} INFO - Running <TaskInstance: gcs_copy_files.validate_config manual__2026-09-10T09:10:52.337883+00:00 [running]> on host 3de24bf0a80c
+[2026-09-10T09:10:53.531+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='gcs_copy_files' AIRFLOW_CTX_TASK_ID='validate_config' AIRFLOW_CTX_EXECUTION_DATE='2026-09-10T09:10:52.337883+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-10T09:10:52.337883+00:00'
+[2026-09-10T09:10:53.533+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-10T09:10:53.556+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-10T09:10:53.557+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/gcs_copy_files.py", line 63, in validate_config
+    raise AirflowFailException(
+airflow.exceptions.AirflowFailException: Missing required Airflow Variable(s): gcs_destination_object. Set them under Admin -> Variables before running this DAG.
+[2026-09-10T09:10:53.562+0000] {taskinstance.py:1206} INFO - Immediate failure requested. Marking task as FAILED. dag_id=gcs_copy_files, task_id=validate_config, run_id=manual__2026-09-10T09:10:52.337883+00:00, execution_date=20260910T091052, start_date=20260910T091053, end_date=20260910T091053
+[2026-09-10T09:10:53.566+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 27 for task validate_config (Missing required Airflow Variable(s): gcs_destination_object. Set them under Admin -> Variables before running this DAG.; 184)
+[2026-09-10T09:10:53.578+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-09-10T09:10:53.591+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-10T09:10:53.593+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

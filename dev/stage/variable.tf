@@ -16,8 +16,8 @@ variable "project_id" {
   default     = "ee-india-se-data"
 }
 
-variable "file_path" {
+variable "oauth_key_file" {
   description = "Oauth key file"
   type        = string
-  default     = "/Users/sumant/.ssh/ee-india-se-data-0f3e7b1c5d4f.json"
+  default     = "/ee-india-se-data-0f3e7b1c5d4f.json"
 }

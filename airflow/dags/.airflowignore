@@ -1,0 +1,5 @@
+# Astro's default example DAG - written for Airflow 3.x (airflow.sdk),
+# incompatible with the Airflow 2.9.3 image this docker-compose uses.
+# Not part of the actual pipeline; ignored so it stops showing as a
+# broken DAG import error.
+exampledag.py

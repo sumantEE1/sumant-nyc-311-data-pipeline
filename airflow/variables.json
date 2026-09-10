@@ -1,0 +1,7 @@
+{
+    "gcs_destination_bucket": "gs://sumant_nyc311",
+    "gcs_source_bucket": "gs://nyc-311-dataset",
+    "gcs_source_object": "/",
+    "gcs_destination_object": "/",
+    "google_cloud_default": 
+}

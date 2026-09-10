@@ -1,0 +1,191 @@
+[2026-09-10T09:12:05.464+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-10T09:12:05.472+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: gcs_copy_files.copy_files manual__2026-09-10T09:12:03.844202+00:00 [queued]>
+[2026-09-10T09:12:05.474+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: gcs_copy_files.copy_files manual__2026-09-10T09:12:03.844202+00:00 [queued]>
+[2026-09-10T09:12:05.475+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-10T09:12:05.480+0000] {taskinstance.py:2330} INFO - Executing <Task(GCSToGCSOperator): copy_files> on 2026-09-10 09:12:03.844202+00:00
+[2026-09-10T09:12:05.482+0000] {standard_task_runner.py:64} INFO - Started process 212 to run task
+[2026-09-10T09:12:05.483+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'gcs_copy_files', 'copy_files', 'manual__2026-09-10T09:12:03.844202+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/gcs_copy_files.py', '--cfg-path', '/tmp/tmptju028pe']
+[2026-09-10T09:12:05.486+0000] {standard_task_runner.py:91} INFO - Job 29: Subtask copy_files
+[2026-09-10T09:12:05.510+0000] {task_command.py:426} INFO - Running <TaskInstance: gcs_copy_files.copy_files manual__2026-09-10T09:12:03.844202+00:00 [running]> on host 3de24bf0a80c
+[2026-09-10T09:12:05.574+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='gcs_copy_files' AIRFLOW_CTX_TASK_ID='copy_files' AIRFLOW_CTX_EXECUTION_DATE='2026-09-10T09:12:03.844202+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-10T09:12:03.844202+00:00'
+[2026-09-10T09:12:05.575+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-10T09:12:05.582+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-09-10T09:12:05.582+0000] {connection.py:274} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2026-09-10T09:12:05.583+0000] {base.py:84} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2026-09-10T09:12:05.583+0000] {gcs_to_gcs.py:465} INFO - Delimiter ignored because wildcard is in prefix
+[2026-09-10T09:12:06.514+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000000 to gs://sumant_nyc311/311_service_requests_000000000000
+[2026-09-10T09:12:12.328+0000] {gcs.py:261} INFO - Total Bytes: 274456762 | Bytes Written: 274456762
+[2026-09-10T09:12:12.331+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000000 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000000 in bucket sumant_nyc311
+[2026-09-10T09:12:12.331+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000001 to gs://sumant_nyc311/311_service_requests_000000000001
+[2026-09-10T09:12:19.242+0000] {gcs.py:261} INFO - Total Bytes: 274090396 | Bytes Written: 274090396
+[2026-09-10T09:12:19.244+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000001 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000001 in bucket sumant_nyc311
+[2026-09-10T09:12:19.244+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000002 to gs://sumant_nyc311/311_service_requests_000000000002
+[2026-09-10T09:12:26.445+0000] {gcs.py:261} INFO - Total Bytes: 274446903 | Bytes Written: 274446903
+[2026-09-10T09:12:26.447+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000002 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000002 in bucket sumant_nyc311
+[2026-09-10T09:12:26.448+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000003 to gs://sumant_nyc311/311_service_requests_000000000003
+[2026-09-10T09:12:35.682+0000] {gcs.py:261} INFO - Total Bytes: 274033659 | Bytes Written: 274033659
+[2026-09-10T09:12:35.685+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000003 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000003 in bucket sumant_nyc311
+[2026-09-10T09:12:35.685+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000004 to gs://sumant_nyc311/311_service_requests_000000000004
+[2026-09-10T09:12:40.266+0000] {gcs.py:261} INFO - Total Bytes: 272867342 | Bytes Written: 272867342
+[2026-09-10T09:12:40.269+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000004 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000004 in bucket sumant_nyc311
+[2026-09-10T09:12:40.269+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000005 to gs://sumant_nyc311/311_service_requests_000000000005
+[2026-09-10T09:12:44.801+0000] {gcs.py:261} INFO - Total Bytes: 274161305 | Bytes Written: 274161305
+[2026-09-10T09:12:44.802+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000005 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000005 in bucket sumant_nyc311
+[2026-09-10T09:12:44.802+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000006 to gs://sumant_nyc311/311_service_requests_000000000006
+[2026-09-10T09:12:48.948+0000] {gcs.py:261} INFO - Total Bytes: 274220546 | Bytes Written: 274220546
+[2026-09-10T09:12:48.957+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000006 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000006 in bucket sumant_nyc311
+[2026-09-10T09:12:48.957+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000007 to gs://sumant_nyc311/311_service_requests_000000000007
+[2026-09-10T09:12:54.003+0000] {gcs.py:261} INFO - Total Bytes: 273577198 | Bytes Written: 273577198
+[2026-09-10T09:12:54.005+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000007 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000007 in bucket sumant_nyc311
+[2026-09-10T09:12:54.005+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000008 to gs://sumant_nyc311/311_service_requests_000000000008
+[2026-09-10T09:12:59.216+0000] {gcs.py:261} INFO - Total Bytes: 276384754 | Bytes Written: 276384754
+[2026-09-10T09:12:59.218+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000008 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000008 in bucket sumant_nyc311
+[2026-09-10T09:12:59.219+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000009 to gs://sumant_nyc311/311_service_requests_000000000009
+[2026-09-10T09:13:05.012+0000] {gcs.py:261} INFO - Total Bytes: 274118400 | Bytes Written: 274118400
+[2026-09-10T09:13:05.015+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000009 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000009 in bucket sumant_nyc311
+[2026-09-10T09:13:05.015+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000010 to gs://sumant_nyc311/311_service_requests_000000000010
+[2026-09-10T09:13:09.453+0000] {gcs.py:261} INFO - Total Bytes: 273199510 | Bytes Written: 273199510
+[2026-09-10T09:13:09.454+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000010 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000010 in bucket sumant_nyc311
+[2026-09-10T09:13:09.454+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000011 to gs://sumant_nyc311/311_service_requests_000000000011
+[2026-09-10T09:13:13.906+0000] {gcs.py:261} INFO - Total Bytes: 273172742 | Bytes Written: 273172742
+[2026-09-10T09:13:13.908+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000011 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000011 in bucket sumant_nyc311
+[2026-09-10T09:13:13.908+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000012 to gs://sumant_nyc311/311_service_requests_000000000012
+[2026-09-10T09:13:17.941+0000] {gcs.py:261} INFO - Total Bytes: 273838971 | Bytes Written: 273838971
+[2026-09-10T09:13:17.942+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000012 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000012 in bucket sumant_nyc311
+[2026-09-10T09:13:17.942+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000013 to gs://sumant_nyc311/311_service_requests_000000000013
+[2026-09-10T09:13:22.459+0000] {gcs.py:261} INFO - Total Bytes: 272829362 | Bytes Written: 272829362
+[2026-09-10T09:13:22.461+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000013 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000013 in bucket sumant_nyc311
+[2026-09-10T09:13:22.462+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000014 to gs://sumant_nyc311/311_service_requests_000000000014
+[2026-09-10T09:13:27.476+0000] {gcs.py:261} INFO - Total Bytes: 273965842 | Bytes Written: 273965842
+[2026-09-10T09:13:27.477+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000014 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000014 in bucket sumant_nyc311
+[2026-09-10T09:13:27.477+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000015 to gs://sumant_nyc311/311_service_requests_000000000015
+[2026-09-10T09:13:32.198+0000] {gcs.py:261} INFO - Total Bytes: 273088872 | Bytes Written: 273088872
+[2026-09-10T09:13:32.201+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000015 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000015 in bucket sumant_nyc311
+[2026-09-10T09:13:32.202+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000016 to gs://sumant_nyc311/311_service_requests_000000000016
+[2026-09-10T09:13:38.126+0000] {gcs.py:261} INFO - Total Bytes: 273404136 | Bytes Written: 273404136
+[2026-09-10T09:13:38.126+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000016 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000016 in bucket sumant_nyc311
+[2026-09-10T09:13:38.127+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000017 to gs://sumant_nyc311/311_service_requests_000000000017
+[2026-09-10T09:13:41.711+0000] {gcs.py:261} INFO - Total Bytes: 273049681 | Bytes Written: 273049681
+[2026-09-10T09:13:41.713+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000017 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000017 in bucket sumant_nyc311
+[2026-09-10T09:13:41.714+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000018 to gs://sumant_nyc311/311_service_requests_000000000018
+[2026-09-10T09:13:44.882+0000] {gcs.py:261} INFO - Total Bytes: 272827084 | Bytes Written: 272827084
+[2026-09-10T09:13:44.882+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000018 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000018 in bucket sumant_nyc311
+[2026-09-10T09:13:44.882+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000019 to gs://sumant_nyc311/311_service_requests_000000000019
+[2026-09-10T09:13:50.413+0000] {gcs.py:261} INFO - Total Bytes: 273166030 | Bytes Written: 273166030
+[2026-09-10T09:13:50.414+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000019 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000019 in bucket sumant_nyc311
+[2026-09-10T09:13:50.415+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000020 to gs://sumant_nyc311/311_service_requests_000000000020
+[2026-09-10T09:13:54.554+0000] {gcs.py:261} INFO - Total Bytes: 273235206 | Bytes Written: 273235206
+[2026-09-10T09:13:54.555+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000020 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000020 in bucket sumant_nyc311
+[2026-09-10T09:13:54.556+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000021 to gs://sumant_nyc311/311_service_requests_000000000021
+[2026-09-10T09:13:59.937+0000] {gcs.py:261} INFO - Total Bytes: 274821890 | Bytes Written: 274821890
+[2026-09-10T09:13:59.939+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000021 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000021 in bucket sumant_nyc311
+[2026-09-10T09:13:59.939+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000022 to gs://sumant_nyc311/311_service_requests_000000000022
+[2026-09-10T09:14:06.704+0000] {gcs.py:261} INFO - Total Bytes: 274367340 | Bytes Written: 274367340
+[2026-09-10T09:14:06.706+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000022 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000022 in bucket sumant_nyc311
+[2026-09-10T09:14:06.706+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000023 to gs://sumant_nyc311/311_service_requests_000000000023
+[2026-09-10T09:14:11.752+0000] {gcs.py:261} INFO - Total Bytes: 273751519 | Bytes Written: 273751519
+[2026-09-10T09:14:11.753+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000023 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000023 in bucket sumant_nyc311
+[2026-09-10T09:14:11.753+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000024 to gs://sumant_nyc311/311_service_requests_000000000024
+[2026-09-10T09:14:15.915+0000] {gcs.py:261} INFO - Total Bytes: 273984531 | Bytes Written: 273984531
+[2026-09-10T09:14:15.917+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000024 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000024 in bucket sumant_nyc311
+[2026-09-10T09:14:15.917+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000025 to gs://sumant_nyc311/311_service_requests_000000000025
+[2026-09-10T09:14:20.502+0000] {gcs.py:261} INFO - Total Bytes: 274781377 | Bytes Written: 274781377
+[2026-09-10T09:14:20.509+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000025 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000025 in bucket sumant_nyc311
+[2026-09-10T09:14:20.509+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000026 to gs://sumant_nyc311/311_service_requests_000000000026
+[2026-09-10T09:14:25.288+0000] {gcs.py:261} INFO - Total Bytes: 273689301 | Bytes Written: 273689301
+[2026-09-10T09:14:25.290+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000026 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000026 in bucket sumant_nyc311
+[2026-09-10T09:14:25.291+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000027 to gs://sumant_nyc311/311_service_requests_000000000027
+[2026-09-10T09:14:29.633+0000] {gcs.py:261} INFO - Total Bytes: 274493818 | Bytes Written: 274493818
+[2026-09-10T09:14:29.634+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000027 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000027 in bucket sumant_nyc311
+[2026-09-10T09:14:29.635+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000028 to gs://sumant_nyc311/311_service_requests_000000000028
+[2026-09-10T09:14:35.469+0000] {gcs.py:261} INFO - Total Bytes: 274508093 | Bytes Written: 274508093
+[2026-09-10T09:14:35.471+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000028 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000028 in bucket sumant_nyc311
+[2026-09-10T09:14:35.472+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000029 to gs://sumant_nyc311/311_service_requests_000000000029
+[2026-09-10T09:14:40.385+0000] {gcs.py:261} INFO - Total Bytes: 274275140 | Bytes Written: 274275140
+[2026-09-10T09:14:40.387+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000029 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000029 in bucket sumant_nyc311
+[2026-09-10T09:14:40.387+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000030 to gs://sumant_nyc311/311_service_requests_000000000030
+[2026-09-10T09:14:44.283+0000] {gcs.py:261} INFO - Total Bytes: 273099670 | Bytes Written: 273099670
+[2026-09-10T09:14:44.302+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000030 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000030 in bucket sumant_nyc311
+[2026-09-10T09:14:44.302+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000031 to gs://sumant_nyc311/311_service_requests_000000000031
+[2026-09-10T09:14:48.064+0000] {gcs.py:261} INFO - Total Bytes: 274331088 | Bytes Written: 274331088
+[2026-09-10T09:14:48.065+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000031 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000031 in bucket sumant_nyc311
+[2026-09-10T09:14:48.065+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000032 to gs://sumant_nyc311/311_service_requests_000000000032
+[2026-09-10T09:14:53.335+0000] {gcs.py:261} INFO - Total Bytes: 273456208 | Bytes Written: 273456208
+[2026-09-10T09:14:53.337+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000032 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000032 in bucket sumant_nyc311
+[2026-09-10T09:14:53.337+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000033 to gs://sumant_nyc311/311_service_requests_000000000033
+[2026-09-10T09:14:59.615+0000] {gcs.py:261} INFO - Total Bytes: 273781487 | Bytes Written: 273781487
+[2026-09-10T09:14:59.621+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000033 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000033 in bucket sumant_nyc311
+[2026-09-10T09:14:59.621+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000034 to gs://sumant_nyc311/311_service_requests_000000000034
+[2026-09-10T09:15:05.704+0000] {gcs.py:261} INFO - Total Bytes: 272680521 | Bytes Written: 272680521
+[2026-09-10T09:15:05.706+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000034 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000034 in bucket sumant_nyc311
+[2026-09-10T09:15:05.707+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000035 to gs://sumant_nyc311/311_service_requests_000000000035
+[2026-09-10T09:15:10.054+0000] {gcs.py:261} INFO - Total Bytes: 274508634 | Bytes Written: 274508634
+[2026-09-10T09:15:10.058+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000035 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000035 in bucket sumant_nyc311
+[2026-09-10T09:15:10.059+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000036 to gs://sumant_nyc311/311_service_requests_000000000036
+[2026-09-10T09:15:14.410+0000] {gcs.py:261} INFO - Total Bytes: 272837642 | Bytes Written: 272837642
+[2026-09-10T09:15:14.414+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000036 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000036 in bucket sumant_nyc311
+[2026-09-10T09:15:14.414+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000037 to gs://sumant_nyc311/311_service_requests_000000000037
+[2026-09-10T09:15:19.493+0000] {gcs.py:261} INFO - Total Bytes: 273273114 | Bytes Written: 273273114
+[2026-09-10T09:15:19.494+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000037 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000037 in bucket sumant_nyc311
+[2026-09-10T09:15:19.494+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000038 to gs://sumant_nyc311/311_service_requests_000000000038
+[2026-09-10T09:15:24.729+0000] {gcs.py:261} INFO - Total Bytes: 274312326 | Bytes Written: 274312326
+[2026-09-10T09:15:24.731+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000038 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000038 in bucket sumant_nyc311
+[2026-09-10T09:15:24.732+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000039 to gs://sumant_nyc311/311_service_requests_000000000039
+[2026-09-10T09:15:29.194+0000] {gcs.py:261} INFO - Total Bytes: 273925307 | Bytes Written: 273925307
+[2026-09-10T09:15:29.195+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000039 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000039 in bucket sumant_nyc311
+[2026-09-10T09:15:29.195+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000040 to gs://sumant_nyc311/311_service_requests_000000000040
+[2026-09-10T09:15:35.069+0000] {gcs.py:261} INFO - Total Bytes: 273711558 | Bytes Written: 273711558
+[2026-09-10T09:15:35.071+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000040 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000040 in bucket sumant_nyc311
+[2026-09-10T09:15:35.072+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000041 to gs://sumant_nyc311/311_service_requests_000000000041
+[2026-09-10T09:15:39.980+0000] {gcs.py:261} INFO - Total Bytes: 274073938 | Bytes Written: 274073938
+[2026-09-10T09:15:39.981+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000041 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000041 in bucket sumant_nyc311
+[2026-09-10T09:15:39.981+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000042 to gs://sumant_nyc311/311_service_requests_000000000042
+[2026-09-10T09:15:43.972+0000] {gcs.py:261} INFO - Total Bytes: 274198288 | Bytes Written: 274198288
+[2026-09-10T09:15:43.974+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000042 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000042 in bucket sumant_nyc311
+[2026-09-10T09:15:43.974+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000043 to gs://sumant_nyc311/311_service_requests_000000000043
+[2026-09-10T09:15:48.556+0000] {gcs.py:261} INFO - Total Bytes: 274165801 | Bytes Written: 274165801
+[2026-09-10T09:15:48.557+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000043 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000043 in bucket sumant_nyc311
+[2026-09-10T09:15:48.558+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000044 to gs://sumant_nyc311/311_service_requests_000000000044
+[2026-09-10T09:15:52.956+0000] {gcs.py:261} INFO - Total Bytes: 273127668 | Bytes Written: 273127668
+[2026-09-10T09:15:52.958+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000044 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000044 in bucket sumant_nyc311
+[2026-09-10T09:15:52.959+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000045 to gs://sumant_nyc311/311_service_requests_000000000045
+[2026-09-10T09:15:57.323+0000] {gcs.py:261} INFO - Total Bytes: 274655245 | Bytes Written: 274655245
+[2026-09-10T09:15:57.325+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000045 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000045 in bucket sumant_nyc311
+[2026-09-10T09:15:57.325+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000046 to gs://sumant_nyc311/311_service_requests_000000000046
+[2026-09-10T09:16:02.609+0000] {gcs.py:261} INFO - Total Bytes: 274492461 | Bytes Written: 274492461
+[2026-09-10T09:16:02.610+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000046 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000046 in bucket sumant_nyc311
+[2026-09-10T09:16:02.610+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000047 to gs://sumant_nyc311/311_service_requests_000000000047
+[2026-09-10T09:16:07.013+0000] {gcs.py:261} INFO - Total Bytes: 273974234 | Bytes Written: 273974234
+[2026-09-10T09:16:07.013+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000047 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000047 in bucket sumant_nyc311
+[2026-09-10T09:16:07.014+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000048 to gs://sumant_nyc311/311_service_requests_000000000048
+[2026-09-10T09:16:13.025+0000] {gcs.py:261} INFO - Total Bytes: 273891346 | Bytes Written: 273891346
+[2026-09-10T09:16:13.027+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000048 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000048 in bucket sumant_nyc311
+[2026-09-10T09:16:13.027+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000049 to gs://sumant_nyc311/311_service_requests_000000000049
+[2026-09-10T09:16:18.175+0000] {gcs.py:261} INFO - Total Bytes: 275012593 | Bytes Written: 275012593
+[2026-09-10T09:16:18.176+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000049 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000049 in bucket sumant_nyc311
+[2026-09-10T09:16:18.176+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000050 to gs://sumant_nyc311/311_service_requests_000000000050
+[2026-09-10T09:16:23.478+0000] {gcs.py:261} INFO - Total Bytes: 273444605 | Bytes Written: 273444605
+[2026-09-10T09:16:23.481+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000050 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000050 in bucket sumant_nyc311
+[2026-09-10T09:16:23.482+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000051 to gs://sumant_nyc311/311_service_requests_000000000051
+[2026-09-10T09:16:27.702+0000] {gcs.py:261} INFO - Total Bytes: 273062252 | Bytes Written: 273062252
+[2026-09-10T09:16:27.704+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000051 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000051 in bucket sumant_nyc311
+[2026-09-10T09:16:27.704+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000052 to gs://sumant_nyc311/311_service_requests_000000000052
+[2026-09-10T09:16:33.128+0000] {gcs.py:261} INFO - Total Bytes: 273529714 | Bytes Written: 273529714
+[2026-09-10T09:16:33.128+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000052 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000052 in bucket sumant_nyc311
+[2026-09-10T09:16:33.129+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000053 to gs://sumant_nyc311/311_service_requests_000000000053
+[2026-09-10T09:16:37.941+0000] {gcs.py:261} INFO - Total Bytes: 273978122 | Bytes Written: 273978122
+[2026-09-10T09:16:37.943+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000053 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000053 in bucket sumant_nyc311
+[2026-09-10T09:16:37.943+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000054 to gs://sumant_nyc311/311_service_requests_000000000054
+[2026-09-10T09:16:42.652+0000] {gcs.py:261} INFO - Total Bytes: 274322440 | Bytes Written: 274322440
+[2026-09-10T09:16:42.654+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000054 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000054 in bucket sumant_nyc311
+[2026-09-10T09:16:42.655+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000055 to gs://sumant_nyc311/311_service_requests_000000000055
+[2026-09-10T09:16:46.138+0000] {gcs.py:261} INFO - Total Bytes: 273833911 | Bytes Written: 273833911
+[2026-09-10T09:16:46.140+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000055 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000055 in bucket sumant_nyc311
+[2026-09-10T09:16:46.140+0000] {gcs_to_gcs.py:534} INFO - Executing copy of gs://nyc-311-dataset/311_service_requests_000000000056 to gs://sumant_nyc311/311_service_requests_000000000056
+[2026-09-10T09:16:50.843+0000] {gcs.py:261} INFO - Total Bytes: 274295086 | Bytes Written: 274295086
+[2026-09-10T09:16:50.846+0000] {gcs.py:269} INFO - Object 311_service_requests_000000000056 in bucket nyc-311-dataset rewritten to object 311_service_requests_000000000056 in bucket sumant_nyc311
+[2026-09-10T09:16:50.847+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-10T09:16:50.874+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=gcs_copy_files, task_id=copy_files, run_id=manual__2026-09-10T09:12:03.844202+00:00, execution_date=20260910T091203, start_date=20260910T091205, end_date=20260910T091650
+[2026-09-10T09:16:50.936+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-09-10T09:16:50.953+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-10T09:16:50.955+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

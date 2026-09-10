@@ -120,3 +120,32 @@ Create bucket with auto delete
             }
         }
     ```
+Upgraded Claude to enterprise
+    Asked in channel #ask-claude-enterprise
+    After upgrade installed Claude app 
+        Switched cowork
+        Gave folder access to repository aiflow folder
+        
+        Asked Claude
+            ```Create airflow configuration
+                Create an AirflowDocker compose yaml file```
+
+            Response
+                ```
+                    YAML validated. I created two files in your airflow folder:
+
+                    docker-compose.yaml — Postgres + Airflow webserver/scheduler using LocalExecutor, with an airflow-init service that migrates the DB and creates an admin user (airflow/airflow), plus mounts for dags, logs, plugins, include.
+                    Dockerfile — was empty, so I filled it in to build from apache/airflow:2.9.3-python3.11 and install your requirements.txt.
+
+                    I also added AIRFLOW_UID=50000 to your .env and created the logs/ folder (both expected by the compose file).
+
+                    Run it with docker compose up -d, then open http://localhost:8080 (login: airflow/airflow).
+                ```
+
+Claude updated name of the file keys to service-account.json to match docker compose and airflow settings.
+
+Added variables 
+    gcs_source_bucket, gcs_source_object, gcs_destination_bucket, gcs_destination_object
+
+Trigger the DAG either via UI or CLI
+    docker compose exec airflow-webserver airflow dags trigger gcs_copy_files
