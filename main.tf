@@ -6,22 +6,16 @@ terraform {
   }
 }
 
-locals {
-  organization_name = "GUSDATD"
-  account_name      = "DAB70621"
-  private_key_path  = "~/.ssh/snowflake_rsa_key.p8"
-}
-
 provider "snowflake" {
-    organization_name = local.organization_name
-    account_name      = local.account_name
-    user              = "sumant.dey"
-    role              = "SE_DE_PARTICIPANT"
-    authenticator     = "SNOWFLAKE_JWT"
-    private_key       = file(local.private_key_path)
+    organization_name = var.organisation_name
+    account_name      = var.account_name
+    user              = var.snowflake_user
+    role              = var.snowflake_role
+    authenticator     = var.authenticator
+    private_key       = file(var.private_key_path)
 
     # Enable the preview table resource feature
-    preview_features_enabled = ["snowflake_table_resource"]
+    preview_features_enabled = ["snowflake_table_resource", "snowflake_stage_resource", "snowflake_file_format_resource"]
 }
 
 
@@ -40,15 +34,15 @@ provider "snowflake" {
 
 # Define the RAW schema within that database
 resource "snowflake_schema" "SUMANT_DEY_RAW" {
-  database            = "DE_CROSS_SKILLING_NYC_311"
-  name                = "SUMANT_DEY_RAW"
+  database            = var.database_name
+  name                = var.schema_name
   comment             = "Schema for raw ingest layers managed by tools like Fivetran/Airbyte."
 }
 
 resource "snowflake_table" "sumant_dey_raw_nyc_311_data_table" {
-  database = "DE_CROSS_SKILLING_NYC_311"
-  schema   = "SUMANT_DEY_RAW"
-  name     = "sumant_dey_raw_nyc_311_data_table"
+  database = var.database_name
+  schema   = var.schema_name
+  name     = var.table_name
   comment  = "A table to store nyc practise raw data"
 
   # Define columns inside the table block
@@ -264,4 +258,19 @@ resource "snowflake_table" "sumant_dey_raw_nyc_311_data_table" {
             constant = "CURRENT_TIMESTAMP()"
         }
     }
+}
+
+resource "snowflake_file_format_csv" "csv_file_format" {
+  name        = var.csv_file_format_name
+  database    = var.database_name
+  schema      = var.schema_name
+}
+
+resource "snowflake_stage" "gcs_stage" {
+  database            = var.database_name
+  schema              = var.schema_name
+  name                = var.stage_name
+  url                 = var.gcs_bucket_url
+  storage_integration = var.gcs_integration_name
+  file_format         = "FORMAT_NAME = ${var.database_name}.${var.schema_name}.${var.csv_file_format_name}"
 }
