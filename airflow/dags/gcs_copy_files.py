@@ -1,34 +1,19 @@
-"""
-DAG: gcs_copy_files
---------------------
-Copies file(s) between two locations in Google Cloud Storage.
-
-Configuration is read from Airflow Variables (Admin -> Variables in the UI),
-so you can change buckets/paths without editing this file:
-
-    gcs_source_bucket        bare bucket name, e.g. "my-source-bucket"
-                              (no "gs://" prefix)
-    gcs_source_object        e.g. "incoming/data.csv" for a single file, a
-                              prefix like "incoming/" to copy a folder, or
-                              "" (empty string) to copy everything in the
-                              bucket. GCS object names never start with
-                              "/", so a prefix of "/" matches nothing.
-    gcs_destination_bucket   bare bucket name, e.g. "my-destination-bucket"
-    gcs_destination_object   e.g. "processed/data.csv", a folder prefix, or
-                              "" to keep the same names at the bucket root
-
-Requires:
-    - apache-airflow-providers-google  (add to requirements.txt)
-    - An Airflow connection named "google_cloud_default" with access to
-      both the source and destination buckets (Admin -> Connections).
-"""
 from datetime import datetime, timedelta
-
+import os
+import snowflake.connector
+from snowflake.connector import connect
 from airflow import DAG
+from airflow.decorators import task
 from airflow.exceptions import AirflowFailException
 from airflow.models import Variable
 from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_gcs import GCSToGCSOperator
+from airflow.providers.snowflake.transfers.copy_into_snowflake import CopyFromExternalStageToSnowflakeOperator
+
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 REQUIRED_VARIABLES = [
     "gcs_source_bucket",
@@ -37,57 +22,18 @@ REQUIRED_VARIABLES = [
     "gcs_destination_object",
 ]
 
-
-def validate_config(**context):
-    """
-    Reads the required Airflow Variables and fails the task early, with a
-    clear message, if any are missing.
-
-    Variable.get() raises a KeyError when a variable doesn't exist. We
-    catch that specific exception (rather than a bare 'except') so we
-    only handle the error we expect, and re-raise it as an
-    AirflowFailException -- this marks the task as Failed (not just an
-    error in the logs) and stops the DAG from moving on to the copy step
-    with bad/missing config.
-    """
-    config = {}
-    missing = []
-
-    for var_name in REQUIRED_VARIABLES:
-        try:
-            config[var_name] = Variable.get(var_name)
-        except KeyError:
-            missing.append(var_name)
-
-    if missing:
-        raise AirflowFailException(
-            "Missing required Airflow Variable(s): "
-            f"{', '.join(missing)}. Set them under Admin -> Variables "
-            "before running this DAG."
-        )
-
-    # Push the validated config to XCom so downstream tasks/logs can use it.
-    context["ti"].xcom_push(key="gcs_config", value=config)
-    return config
-
-
 with DAG(
     dag_id="gcs_copy_files",
-    description="Copy file(s) between two GCS locations",
+    description="Copy file(s) between two GCS locations, then load into Snowflake",
     start_date=datetime(2024, 1, 1),
-    schedule=None,  # trigger manually; change to a cron string to automate
+    schedule=None,
     catchup=False,
     default_args={
         "retries": 2,
         "retry_delay": timedelta(minutes=5),
     },
-    tags=["gcs", "file-transfer"],
+    tags=["gcs", "file-transfer", "snowflake"],
 ) as dag:
-
-    validate = PythonOperator(
-        task_id="validate_config",
-        python_callable=validate_config,
-    )
 
     copy_files = GCSToGCSOperator(
         task_id="copy_files",
@@ -96,9 +42,42 @@ with DAG(
         destination_bucket="{{ var.value.gcs_destination_bucket }}",
         destination_object="{{ var.value.gcs_destination_object }}",
         gcp_conn_id="google_cloud_default",
-        # Set to True to also remove the source file(s) after copying (move
-        # instead of copy). Leave False to keep the originals in place.
         move_object=False,
     )
 
-    validate >> copy_files
+    copy_files
+
+
+SNOWFLAKE_ACCOUNT = "gusdatd-dab70621"  # "<orgname>-<account_name>" from the Snowsight URL
+SNOWFLAKE_WAREHOUSE = "SNOWFLAKE_LEARNING_WH"
+SNOWFLAKE_DATABASE = "DE_CROSS_SKILLING_NYC_311"
+SNOWFLAKE_SCHEMA = "SUMANT_DEY_RAW"
+
+
+
+with DAG(
+    dag_id="copy_raw_data_into_snowflake",
+    description="load data from GCS into Snowflake",
+    start_date=datetime(2026,9, 1),
+    schedule=None,
+    catchup=False,
+    default_args={
+        "retries": 2,
+        "retry_delay": timedelta(minutes=2),
+    },
+    tags=["gcs", "file-transfer", "snowflake"],
+) as dag:
+    copy_raw_data = CopyFromExternalStageToSnowflakeOperator(
+                task_id="copy_into_snowflake",
+                schema="SUMANT_DEY_RAW",
+                database="DE_CROSS_SKILLING_NYC_311",
+                stage='"Sumant_GCS_Bucket_STAGE"',
+                table="SUMANT_DEY_RAW_NYC_311_DATA_TABLE",
+                pattern=r"311_service_requests.*",
+                snowflake_conn_id="snowflake_default",
+                file_format="(field_delimiter=',')",
+                copy_options="ON_ERROR = 'CONTINUE'",
+                columns_array=["UNIQUE_KEY","CREATED_DATE","CLOSED_DATE","AGENCY","AGENCY_NAME","COMPLAINT_TYPE","DESCRIPTOR","LOCATION_TYPE","INCIDENT_ZIP","INCIDENT_ADDRESS","STREET_NAME","CROSS_STREET_1","CROSS_STREET_2","INTERSECTION_STREET_1","INTERSECTION_STREET_2","ADDRESS_TYPE","CITY","LANDMARK","FACILITY_TYPE","STATUS","DUE_DATE","RESOLUTION_DESCRIPTION","RESOLUTION_ACTION_UPDATED_DATE","COMMUNITY_BOARD","BOROUGH","X_COORDINATE","Y_COORDINATE","PARK_FACILITY_NAME","PARK_BOROUGH","BBL","OPEN_DATA_CHANNEL_TYPE","VEHICLE_TYPE","TAXI_COMPANY_BOROUGH","TAXI_PICKUP_LOCATION","BRIDGE_HIGHWAY_NAME","BRIDGE_HIGHWAY_DIRECTION","ROAD_RAMP","BRIDGE_HIGHWAY_SEGMENT","LATITUDE","LONGITUDE","LOCATION"]
+            )
+    
+    copy_raw_data

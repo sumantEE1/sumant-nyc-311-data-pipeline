@@ -266,11 +266,16 @@ resource "snowflake_file_format_csv" "csv_file_format" {
   schema      = var.schema_name
 }
 
-resource "snowflake_stage" "gcs_stage" {
+resource "snowflake_stage_external_gcs" "gcs_stage" {
   database            = var.database_name
   schema              = var.schema_name
   name                = var.stage_name
   url                 = var.gcs_bucket_url
   storage_integration = var.gcs_integration_name
-  file_format         = "FORMAT_NAME = ${var.database_name}.${var.schema_name}.${var.csv_file_format_name}"
+  file_format {
+    csv{
+        field_delimiter = ","
+        skip_header     = 1
+    }
+  }
 }

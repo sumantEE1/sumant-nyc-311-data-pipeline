@@ -10,24 +10,14 @@ x-airflow-common: &airflow-common
     AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
     AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth"
     _PIP_ADDITIONAL_REQUIREMENTS: ""
-    # Fallback: Application Default Credentials, used by any GCP client
-    # that isn't given an explicit conn_id.
+    
     GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/keys/service-account.json
-    # Explicitly defines the "google_cloud_default" Airflow connection
-    # (env vars of the form AIRFLOW_CONN_<CONN_ID> override/define
-    # connections without needing the UI or airflow_settings.yaml, which
-    # plain `docker compose up` does not read). This is what
-    # GCSToGCSOperator(gcp_conn_id="google_cloud_default") actually uses -
-    # points at the mounted service account key, not your host gcloud CLI
-    # login (containers can't see host gcloud credentials unless mounted).
-    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: "google-cloud-platform://?key_path=%2Fopt%2Fairflow%2Fkeys%2Fservice-account.json&project=ee-india-se-data&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform"
+    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./include:/opt/airflow/include
-    # Mount the service account key created via gcloud (see README) -
-    # read-only, and never committed to git (see .gitignore).
     - ./keys:/opt/airflow/keys:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
@@ -77,13 +67,19 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    
     depends_on:
+      postgres:
+        condition: service_healthy
       airflow-init:
         condition: service_completed_successfully
 
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    environment:
+      <<: *airflow-common-env
+      SNOWFLAKE_USER: ${SNOWFLAKE_USER}
     healthcheck:
       test: ["CMD-SHELL", "airflow jobs check --job-type SchedulerJob --hostname \"$${HOSTNAME}\""]
       interval: 30s
@@ -91,6 +87,8 @@ services:
       retries: 5
     restart: always
     depends_on:
+      postgres:
+        condition: service_healthy
       airflow-init:
         condition: service_completed_successfully
 

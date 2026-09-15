@@ -6,7 +6,7 @@ variable organisation_name {
 
 variable account_name {
   type        = string
-  default     = "DAB70621"
+  default     = "gusdatd-dab70621"
   description = "description"
 }
 
@@ -54,7 +54,7 @@ variable schema_name {
 
 variable table_name{
   type        = string
-  default     = "sumant_dey_raw_nyc_311_data_table"
+  default     = "SUMANT_DEY_RAW_NYC_311_DATA_TABLE"
   description = "description"
 }
 

@@ -18,3 +18,5 @@ airflow.db
 **/.astro/dbt_metadata.json
 **/.astro/manifest.slim.json
 logs/
+gcp-key.json
+snowflake_rsa_key.p8
