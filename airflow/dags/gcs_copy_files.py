@@ -71,7 +71,7 @@ with DAG(
                 task_id="copy_into_snowflake",
                 schema="SUMANT_DEY_RAW",
                 database="DE_CROSS_SKILLING_NYC_311",
-                stage='"Sumant_GCS_Bucket_STAGE"',
+                stage="SUMANT_GCS_BUCKET_STAGE",
                 table="SUMANT_DEY_RAW_NYC_311_DATA_TABLE",
                 pattern=r"311_service_requests.*",
                 snowflake_conn_id="snowflake_default",

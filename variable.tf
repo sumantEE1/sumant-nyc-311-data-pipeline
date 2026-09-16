@@ -6,7 +6,7 @@ variable organisation_name {
 
 variable account_name {
   type        = string
-  default     = "gusdatd-dab70621"
+  default     = "DAB70621"
   description = "description"
 }
 
@@ -66,12 +66,18 @@ variable csv_file_format_name {
 
 variable stage_name {
   type        = string
-  default     = "Sumant_GCS_Bucket_STAGE"
+  default     = "SUMANT_GCS_BUCKET_STAGE"
   description = "description"
 }
 
 variable gcs_bucket_url {
   type        = string
   default     = "gcs://sumant_nyc311/"
+  description = "description"
+}
+
+variable notification_integration_name {
+  type        = string
+  default     = "gcs_nyc311_notification_int"
   description = "description"
 }

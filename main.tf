@@ -15,7 +15,7 @@ provider "snowflake" {
     private_key       = file(var.private_key_path)
 
     # Enable the preview table resource feature
-    preview_features_enabled = ["snowflake_table_resource", "snowflake_stage_resource", "snowflake_file_format_resource"]
+    preview_features_enabled = ["snowflake_table_resource", "snowflake_stage_resource", "snowflake_file_format_resource","snowflake_pipe_resource"]
 }
 
 
@@ -39,7 +39,8 @@ resource "snowflake_schema" "SUMANT_DEY_RAW" {
   comment             = "Schema for raw ingest layers managed by tools like Fivetran/Airbyte."
 }
 
-resource "snowflake_table" "sumant_dey_raw_nyc_311_data_table" {
+resource "snowflake_table" "SUMANT_DEY_RAW_NYC_311_DATA_TABLE" {
+  
   database = var.database_name
   schema   = var.schema_name
   name     = var.table_name
@@ -278,4 +279,22 @@ resource "snowflake_stage_external_gcs" "gcs_stage" {
         skip_header     = 1
     }
   }
+}
+
+
+resource "snowflake_pipe" "gcs_snowpipe" {
+    name     = "SUMANT_NYC_SNOWPIPE"
+    database = var.database_name
+    schema   = var.schema_name
+    
+    comment  = "A pipe to load data from GCS to Snowflake"
+
+    auto_ingest = false
+    copy_statement = <<SQL
+      COPY INTO ${var.database_name}.${var.schema_name}.${var.table_name}
+      (UNIQUE_KEY, CREATED_DATE, CLOSED_DATE, AGENCY, AGENCY_NAME, COMPLAINT_TYPE, DESCRIPTOR, LOCATION_TYPE, INCIDENT_ZIP, INCIDENT_ADDRESS, STREET_NAME, CROSS_STREET_1, CROSS_STREET_2, INTERSECTION_STREET_1, INTERSECTION_STREET_2, ADDRESS_TYPE, CITY, LANDMARK, FACILITY_TYPE, STATUS, DUE_DATE, RESOLUTION_DESCRIPTION, RESOLUTION_ACTION_UPDATED_DATE, COMMUNITY_BOARD, BOROUGH, X_COORDINATE, Y_COORDINATE, PARK_FACILITY_NAME, PARK_BOROUGH, BBL, OPEN_DATA_CHANNEL_TYPE, VEHICLE_TYPE, TAXI_COMPANY_BOROUGH, TAXI_PICKUP_LOCATION, BRIDGE_HIGHWAY_NAME, BRIDGE_HIGHWAY_DIRECTION, ROAD_RAMP, BRIDGE_HIGHWAY_SEGMENT, LATITUDE, LONGITUDE, LOCATION)
+      FROM @${var.database_name}.${var.schema_name}.${var.stage_name}
+      FILE_FORMAT = (TYPE = 'CSV' FIELD_DELIMITER = ',' SKIP_HEADER = 1)
+      ON_ERROR = 'CONTINUE';
+    SQL
 }
