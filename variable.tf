@@ -68,11 +68,6 @@ variable table_name{
   description = "description"
 }
 
-variable csv_file_format_name {
-  type        = string
-  default     = "DE_CROSS_SKILLING_CSV_FILE_FORMAT"
-  description = "description"
-}
 
 variable stage_name {
   type        = string

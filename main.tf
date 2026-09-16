@@ -273,11 +273,6 @@ resource "snowflake_table" "SUMANT_DEY_RAW_NYC_311_DATA_TABLE" {
     }
 }
 
-resource "snowflake_file_format_csv" "csv_file_format" {
-  name        = var.csv_file_format_name
-  database    = var.database_name
-  schema      = var.schema_name
-}
 
 resource "snowflake_stage_external_gcs" "gcs_stage" {
   database            = var.database_name
