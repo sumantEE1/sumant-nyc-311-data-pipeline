@@ -36,7 +36,19 @@ provider "snowflake" {
 resource "snowflake_schema" "SUMANT_DEY_RAW" {
   database            = var.database_name
   name                = var.schema_name
-  comment             = "Schema for raw ingest layers managed by tools like Fivetran/Airbyte."
+  comment             = "Schema for raw  layers"
+}
+
+resource "snowflake_schema" "SUMANT_DEY_CURATED" {
+  database            = var.database_name
+  name                = var.schema_name_curated
+  comment             = "Schema for curated layers"
+}
+
+resource "snowflake_schema" "SUMANT_DEY_CONSUME" {
+  database            = var.database_name
+  name                = var.schema_name_consume
+  comment             = "Schema for consume layers "
 }
 
 resource "snowflake_table" "SUMANT_DEY_RAW_NYC_311_DATA_TABLE" {

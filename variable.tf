@@ -51,6 +51,16 @@ variable schema_name {
   default     = "SUMANT_DEY_RAW"
   description = "description"
 }
+variable schema_name_curated {
+  type        = string
+  default     = "SUMANT_DEY_CURATED"
+  description = "description"
+}
+variable schema_name_consume {
+  type        = string
+  default     = "SUMANT_DEY_CONSUME"
+  description = "description"
+}
 
 variable table_name{
   type        = string
