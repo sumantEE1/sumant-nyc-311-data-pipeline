@@ -1,0 +1,14 @@
+version: 2
+sources:
+  - name: raw
+    database: DE_CROSS_SKILLING_NYC_311
+    schema: SUMANT_DEY_RAW
+    tables:
+      - name: SUMANT_DEY_RAW_NYC_311_DATA_TABLE
+        columns:
+          - name: UNIQUE_KEY
+            description: Primary key of the service request table
+            data_tests:
+              - not_null
+              - unique
+
