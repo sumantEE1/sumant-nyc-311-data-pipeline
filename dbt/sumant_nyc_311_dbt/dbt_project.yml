@@ -39,8 +39,8 @@ models:
       +materialized: view
       +schema: staging
     curation:
-      +materialized: table
-      +schema: curation
+      +materialized: view
+      +schema: CURATED
     consume:
       +materialized: table
       +schema: consume

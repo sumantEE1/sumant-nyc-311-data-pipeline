@@ -1,4 +1,5 @@
-with sumant_curated as 
+with sumant_staging
+ as 
     (   select 
             UNIQUE_KEY as unique_key,
             TRY_TO_TIMESTAMP(CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') as created_date,
@@ -47,4 +48,17 @@ with sumant_curated as
         from {{source('raw','SUMANT_DEY_RAW_NYC_311_DATA_TABLE')}}
     )
 
-select * from sumant_curated
+select * from sumant_staging
+
+
+
+-- Test the above query
+--  SELECT 
+--     COUNT(*) AS total_rows,
+--     COUNT(created_date) AS non_null_created_date,
+--     COUNT(closed_date) AS non_null_closed_date,
+--     COUNT(*) - COUNT(created_date) AS null_created_date_count
+-- FROM SUMANT_DEY_RAW_staging.stg_311_service_requests
+
+-- tested it
+-- SELECT community_board,created_date,closed_date,due_date,resolution_action_updated_date,park_borough FROM SUMANT_DEY_RAW_staging.stg_311_service_requests limit 5;
