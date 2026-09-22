@@ -20,3 +20,6 @@ Run for snoflake injection in plugin list
 The file of token is exact path in profile.yml
 The key is `private_key_path`
 The account is orgname-account name in profile.yml
+Added optional format 2nd argument "'YYYY-MM-DD HH24:MI:SS TZD'" for cast try_to_timestamp
+Added INITCAP(TRIM(PARK_BOROUGH)) to standardise it
+The updated column name is updated to snake case but it will appear in upper case in snoflake
