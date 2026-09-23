@@ -44,3 +44,6 @@ models:
     consume:
       +materialized: table
       +schema: consume
+
+vars: 
+  long_resolution_hours : 72

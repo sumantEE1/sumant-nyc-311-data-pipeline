@@ -3,16 +3,10 @@ with sumant_curated as (
     select
         extract(year from created_date) as created_year,
         extract(month from created_date) as created_month,
-
         case when status = 'Closed' then true
              else false
         end as is_closed,
-
-        case when closed_date > created_date
-             then datediff('hour', created_date, closed_date)
-             else null
-        end as resolution_hours,
-
+        {{ get_resolution_hours('hour', 'created_date', 'closed_date') }} as resolution_hours,
         unique_key,
         agency,
         agency_name,
