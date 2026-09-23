@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: dq_311_service_requests_test
+    description: "Test model"
+    columns:
+      - name: unique_key
+        data_tests:
+          - not_null
+          - unique
+      - name: created_date
+        data_tests:
+          - not_null
+      - name: borough
+        data_tests:
+          - accepted_values:
+              values: ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island', '11211', 'Unspecified']

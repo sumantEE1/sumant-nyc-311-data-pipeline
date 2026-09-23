@@ -1,5 +1,4 @@
-with sumant_staging
- as 
+with sumant_staging as 
     (   select 
             UNIQUE_KEY as unique_key,
             TRY_TO_TIMESTAMP(CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') as created_date,
@@ -46,10 +45,10 @@ with sumant_staging
             {{ dbt.current_timestamp() }} AS _ingested_at
 
         from {{source('raw','SUMANT_DEY_RAW_NYC_311_DATA_TABLE')}}
+        where TRY_TO_TIMESTAMP(CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') < TRY_TO_TIMESTAMP(CLOSED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD')
     )
 
 select * from sumant_staging
-
 
 
 -- Test the above query
