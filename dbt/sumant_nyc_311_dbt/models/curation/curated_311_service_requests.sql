@@ -7,6 +7,9 @@ with sumant_curated as (
              else false
         end as is_closed,
         {{ get_resolution_hours('hour', 'created_date', 'closed_date') }} as resolution_hours,
+        case when {{ get_resolution_hours('hour', 'created_date', 'closed_date') }} > '{{ var("long_resolution_hours") }}'
+            then true else false
+        end as is_long_resolution,
         unique_key,
         agency,
         agency_name,
