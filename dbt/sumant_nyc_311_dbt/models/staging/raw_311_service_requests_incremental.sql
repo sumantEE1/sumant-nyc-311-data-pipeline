@@ -2,7 +2,6 @@ with nyc_batch_1 as
     (   select 
             UNIQUE_KEY as unique_key,
             TRY_TO_TIMESTAMP(CREATED_DATE::string, 'YYYY-MM-DD HH24:MI:SS TZD') as created_date,
-            TRY_TO_TIMESTAMP(CLOSED_DATE::string, 'YYYY-MM-DD HH24:MI:SS TZD') as closed_date,
             AGENCY as agency,
             AGENCY_NAME as agency_name,
             COMPLAINT_TYPE as complaint_type,

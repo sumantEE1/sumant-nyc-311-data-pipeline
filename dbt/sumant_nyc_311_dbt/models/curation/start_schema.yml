@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: fct_311_service_requests
+    description: "Test fact table"
+    columns:
+      - name: unique_key
+        data_tests:
+          - not_null
+          - unique
+      - name: created_date
+        data_tests:
+          - not_null
+      - name: complaint_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_complaint')
+              field: complaint_key
+      

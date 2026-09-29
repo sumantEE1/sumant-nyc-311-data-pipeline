@@ -1,0 +1,42 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='unique_key',
+        incremental_strategy='delete+insert'
+    )
+}}
+
+with curated_nyc_incremental as (
+
+    select
+        extract(year from created_date) as created_year,
+        extract(month from created_date) as created_month,
+        case when status = 'Closed' then true
+             else false
+        end as is_closed,
+        {{ get_resolution_hours('hour', 'created_date', 'closed_date') }} as resolution_hours,
+        case when {{ get_resolution_hours('hour', 'created_date', 'closed_date') }} > '{{ var("long_resolution_hours") }}'
+            then true else false
+        end as is_long_resolution,
+        unique_key,
+        agency,
+        agency_name,
+        borough,
+        complaint_type,
+        descriptor,
+        status,
+        created_date,
+        closed_date,
+        resolution_action_updated_date,
+        open_data_channel_type,
+        ingested_at
+
+    from {{ ref('stg_311_service_requests_incremental') }}
+
+)
+
+select * from curated_nyc_incremental
+
+{% if is_incremental() %}
+    where created_date > (select max(created_date) from {{ this }})
+{% endif %}
