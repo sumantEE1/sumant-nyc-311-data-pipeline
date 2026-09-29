@@ -39,3 +39,16 @@ Cast to string stg_311_service_requests_incremental to resolve try to timestamp 
 The dbt was run with no incremental_strategy hence it was merge and status column was updated
 
 Added seed yml in seed folder with column data types defined because of snowflake convert data type to integer automatically when all the row column is null
+
+
+SQL Query returns two rows 
+```
+select * from SUMANT_DEY_RAW_staging.raw_311_service_requests_incremental where unique_key = 20406875
+```
+
+SQL Query returned 1 row
+```
+select * from SUMANT_DEY_RAW_CURATED.curated_311_service_requests_incremental where unique_key = 20406875
+```
+
+To avoid multiple row update the increment strategy (updated created_date to year 2026ß )
