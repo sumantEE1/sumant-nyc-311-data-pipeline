@@ -13,4 +13,11 @@ models:
       - name: borough
         data_tests:
           - accepted_values:
-              values: ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island', '11211', 'Unspecified']
+              values: 
+                - Bronx
+                - Brooklyn
+                - Manhattan
+                - Queens
+                - Staten Island
+                - 11211
+                - Unspecified

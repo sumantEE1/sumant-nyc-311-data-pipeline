@@ -27,3 +27,15 @@ In dbt, the file name of a model’s SQL file acts as the default name for the m
 The query to view model was 
     ```SELECT community_board,created_date,closed_date,due_date,resolution_action_updated_date,park_borough FROM SUMANT_DEY_RAW_staging.stg_311_service_requests```
     filename as model name and schema suffix from dbt_project.yml was created
+
+Raws dbt seed table with schema name and model (file name) SUMANT_DEY_RAW.ticket_6_311
+
+Cast to string stg_311_service_requests_incremental to resolve try to timestamp sql compilation error (It was a may be fix suggested by Claude)The table was created manually for ticket 6. It is a copy paste
+
+```
+ cat 311_service_requests_000000000049 | grep "Open" | tail -n 5 >> Open_requests.csv
+```
+
+The dbt was run with no incremental_strategy hence it was merge and status column was updated
+
+Added seed yml in seed folder with column data types defined because of snowflake convert data type to integer automatically when all the row column is null

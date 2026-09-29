@@ -45,7 +45,7 @@ with sumant_staging as
             {{ dbt.current_timestamp() }} AS _ingested_at
 
         from {{source('raw','SUMANT_DEY_RAW_NYC_311_DATA_TABLE')}}
-        where TRY_TO_TIMESTAMP(CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') < TRY_TO_TIMESTAMP(CLOSED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD')
+        where TRY_TO_TIMESTAMP(CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') < TRY_TO_TIMESTAMP(CLOSED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') or CLOSED_DATE is null
     )
 
 select * from sumant_staging
