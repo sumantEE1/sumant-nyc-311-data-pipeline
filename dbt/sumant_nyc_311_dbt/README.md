@@ -51,4 +51,6 @@ SQL Query returned 1 row
 select * from SUMANT_DEY_RAW_CURATED.curated_311_service_requests_incremental where unique_key = 20406875
 ```
 
-To avoid multiple row update the increment strategy (updated created_date to year 2026ß )
+To avoid multiple row update the increment strategy (updated created_date to year 2026 )
+
+Added unique query in dim 311 complaint sqlto generate unique surrogate/primary key bt generating unique key using unique complaint type and description

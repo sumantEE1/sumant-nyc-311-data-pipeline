@@ -1,10 +1,3 @@
-{{
-    config(
-        materialized='incremental',
-        unique_key='unique_key',
-        incremental_strategy='delete+insert',
-    )
-}}
 with service_requests as 
     (   select 
             unique_key,
@@ -50,9 +43,7 @@ with service_requests as
             location,
             ingested_at
         from {{ref('raw_311_service_requests_incremental')}}
-        {% if is_incremental() %}
-            where created_date > (select max(created_date) from {{ this }})
-        {% endif %}
+        where created_date < closed_date
     )
 
 select * from service_requests

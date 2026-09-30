@@ -45,3 +45,4 @@ seeds:
         latitude: varchar(200)
         longitude: varchar(200)
         location: varchar(200)
+        ingested_at: varchar(200)

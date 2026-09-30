@@ -2,6 +2,7 @@ with nyc_batch_1 as
     (   select 
             UNIQUE_KEY as unique_key,
             TRY_TO_TIMESTAMP(CREATED_DATE::string, 'YYYY-MM-DD HH24:MI:SS TZD') as created_date,
+            TRY_TO_TIMESTAMP(CLOSED_DATE::string, 'YYYY-MM-DD HH24:MI:SS TZD') as closed_date,
             AGENCY as agency,
             AGENCY_NAME as agency_name,
             COMPLAINT_TYPE as complaint_type,
@@ -40,7 +41,7 @@ with nyc_batch_1 as
             LATITUDE as latitude,
             LONGITUDE as longitude,
             LOCATION as location,
-            current_timestamp() as ingested_at
+            TRY_TO_TIMESTAMP(CREATED_DATE::string, 'YYYY-MM-DD HH24:MI:SS TZD') as ingested_at
         from {{source('raw','SUMANT_DEY_RAW_NYC_311_DATA_TABLE')}}
     ),
     nyc_seed_1 as ( 
@@ -85,7 +86,7 @@ with nyc_batch_1 as
             LATITUDE as latitude,
             LONGITUDE as longitude,
             LOCATION as location,
-            current_timestamp() AS ingested_at
+            TRY_TO_TIMESTAMP(ingested_at::string, 'YYYY-MM-DD HH24:MI:SS TZD')
         from {{ ref('ticket_6_311') }}
     ),
     all_requests as (

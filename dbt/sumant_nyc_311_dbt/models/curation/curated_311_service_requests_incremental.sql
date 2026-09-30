@@ -32,11 +32,10 @@ with curated_nyc_incremental as (
         ingested_at
 
     from {{ ref('stg_311_service_requests_incremental') }}
-
+    {% if is_incremental() %}
+        where ingested_at > (select coalesce(max(ingested_at),'1900-01-01'::timestamp) from {{ this }})
+    {% endif %}
 )
 
 select * from curated_nyc_incremental
 
-{% if is_incremental() %}
-    where created_date > (select max(created_date) from {{ this }})
-{% endif %}

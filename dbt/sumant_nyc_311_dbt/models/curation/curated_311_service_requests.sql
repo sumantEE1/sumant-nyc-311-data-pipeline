@@ -1,4 +1,11 @@
-with sumant_curated as (
+{{
+    config(
+        materialized='incremental',
+        unique_key='unique_key',
+        incremental_strategy='merge'
+    )
+}}
+with service_request_curated as (
 
     select
         extract(year from created_date) as created_year,
@@ -21,10 +28,10 @@ with sumant_curated as (
         closed_date,
         resolution_action_updated_date,
         open_data_channel_type,
-        "_loaded_at"
+        ingested_at
 
     from {{ ref('stg_311_service_requests') }}
 
 )
 
-select * from sumant_curated
+select * from service_request_curated

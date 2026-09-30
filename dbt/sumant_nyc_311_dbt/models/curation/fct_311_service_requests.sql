@@ -1,11 +1,7 @@
 with fct_311_service_requests as (
     select 
         unique_key,
-        {{ dbt_utils.generate_surrogate_key([
-                "coalesce(trim(lower(complaint_type)), '')", 
-                "coalesce(trim(lower(descriptor)), '')"
-            ]) 
-        }} as complaint_key,
+        {{ dbt_utils.generate_surrogate_key(['complaint_type', 'descriptor']) }} AS complaint_key,
         agency,
         borough,
         status,
