@@ -86,7 +86,7 @@ with nyc_batch_1 as
             LATITUDE as latitude,
             LONGITUDE as longitude,
             LOCATION as location,
-            TRY_TO_TIMESTAMP(ingested_at::string, 'YYYY-MM-DD HH24:MI:SS TZD')
+            TRY_TO_TIMESTAMP(ingested_at, 'YYYY-MM-DD HH24:MI:SS TZD')
         from {{ ref('ticket_6_311') }}
     ),
     all_requests as (

@@ -54,3 +54,6 @@ select * from SUMANT_DEY_RAW_CURATED.curated_311_service_requests_incremental wh
 To avoid multiple row update the increment strategy (updated created_date to year 2026 )
 
 Added unique query in dim 311 complaint sqlto generate unique surrogate/primary key bt generating unique key using unique complaint type and description
+
+
+SUMANT_DEY_RAW_SUMANT_DEY_RAW_staging.nyc_311_service_request_snapshot  [SUCCESS 20299385 in 64.53s
