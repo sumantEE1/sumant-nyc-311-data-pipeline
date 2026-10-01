@@ -12,4 +12,4 @@ snapshots:
         - closed_date
         - resolution_action_updated_date
       updated_at: ingested_at
-      dbt_valid_to_current: "to_date('2026-12-31')" # Specifies that current records should have `dbt_valid_to` set to `'9999-12-31'` instead of `NULL`.
+      # dbt_valid_to_current: "to_date('2026-12-31')" # Specifies that current records should have `dbt_valid_to` set to `'9999-12-31'` instead of `NULL`.

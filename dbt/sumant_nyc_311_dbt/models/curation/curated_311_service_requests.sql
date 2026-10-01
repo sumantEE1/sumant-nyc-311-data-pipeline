@@ -2,7 +2,7 @@
     config(
         materialized='incremental',
         unique_key='unique_key',
-        incremental_strategy='merge'
+        incremental_strategy='delete+insert'
     )
 }}
 with service_request_curated as (
@@ -31,6 +31,14 @@ with service_request_curated as (
         ingested_at
 
     from {{ ref('stg_311_service_requests') }}
+    -- 1. Dynamic Window: Only process records older than 30 days from today
+where ingested_at < dateadd(day, -30, current_date())
+
+    {% if is_incremental() %}
+    -- 2. Incremental logic: Grab rows newer than what is already in your warehouse
+        and ingested_at > (select max(ingested_at) from {{ this }})
+    {% endif %}
+
 
 )
 

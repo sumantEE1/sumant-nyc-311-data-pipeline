@@ -14,10 +14,10 @@ models:
         data_tests:
           - accepted_values:
               values: 
-                - Bronx
-                - Brooklyn
-                - Manhattan
-                - Queens
-                - Staten Island
-                - 11211
-                - Unspecified
+                - bronx
+                - brooklyn
+                - manhattan
+                - queens
+                - staten_island
+                - _11211
+                - unspecified

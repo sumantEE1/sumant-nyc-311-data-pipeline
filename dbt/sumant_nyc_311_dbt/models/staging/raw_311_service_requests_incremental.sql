@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='unique_key',
+        incremental_strategy='delete+insert'
+    )
+}}
 with nyc_batch_1 as 
     (   select 
             UNIQUE_KEY as unique_key,
@@ -86,7 +93,7 @@ with nyc_batch_1 as
             LATITUDE as latitude,
             LONGITUDE as longitude,
             LOCATION as location,
-            TRY_TO_TIMESTAMP(ingested_at, 'YYYY-MM-DD HH24:MI:SS TZD')
+            TRY_TO_TIMESTAMP(ingested_at, 'YYYY-MM-DD HH24:MI:SS TZD') as ingested_at
         from {{ ref('ticket_6_311') }}
     ),
     all_requests as (
@@ -95,5 +102,12 @@ with nyc_batch_1 as
         select * from nyc_seed_1
     )
 
-
 select * from all_requests
+
+{% if is_incremental() %}
+    -- Incremental runs: only pull rows newer than what's already in the table
+    where created_date > (select max(created_date) from {{ this }})
+{% else %}
+    -- First run / full refresh: only pull rows older than 210 days
+    where created_date < dateadd(day, -210, current_timestamp())
+{% endif %}

@@ -48,15 +48,3 @@ with sumant_staging as
     )
 
 select * from sumant_staging
-
-
--- Test the above query
---  SELECT 
---     COUNT(*) AS total_rows,
---     COUNT(created_date) AS non_null_created_date,
---     COUNT(closed_date) AS non_null_closed_date,
---     COUNT(*) - COUNT(created_date) AS null_created_date_count
--- FROM SUMANT_DEY_RAW_staging.stg_311_service_requests
-
--- tested it
--- SELECT community_board,created_date,closed_date,due_date,resolution_action_updated_date,park_borough FROM SUMANT_DEY_RAW_staging.stg_311_service_requests limit 5;

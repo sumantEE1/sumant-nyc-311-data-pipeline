@@ -43,7 +43,7 @@ with service_requests as
             location,
             ingested_at
         from {{ref('raw_311_service_requests_incremental')}}
-        where created_date < closed_date
+        where created_date < closed_date or closed_date is null
         -- first snapshot run with out seed of updated status
         --  from {{source('raw','SUMANT_DEY_RAW_NYC_311_DATA_TABLE')}}
         -- where TRY_TO_TIMESTAMP(CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') < TRY_TO_TIMESTAMP(CLOSED_DATE, 'YYYY-MM-DD HH24:MI:SS TZD') or CLOSED_DATE is null

@@ -1,0 +1,20 @@
+version: 2
+models:
+  - name: mart_311_complaint_performance
+    description: Request analytics
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: borough
+        data_type: varchar(200)
+      - name: complaint_type
+        data_type: varchar(200)
+      - name: total_requests
+        data_type: integer
+      - name: closed_requests
+        data_type: integer
+      - name: open_requests
+        data_type: integer
+      - name: avg_resolution_hours
+        data_type: integer

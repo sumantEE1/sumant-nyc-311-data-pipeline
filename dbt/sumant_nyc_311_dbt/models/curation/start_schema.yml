@@ -57,4 +57,3 @@ models:
         data_type: varchar(200)
       - name: ingested_a
         data_type: timestamp
-      
