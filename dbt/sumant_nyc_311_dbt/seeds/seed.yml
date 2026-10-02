@@ -2,6 +2,7 @@ version: 2
 
 seeds:
   - name: ticket_6_311
+    description: "This seed file was created to set the data types of the columns in ticket 6 311 csv"
     config:
       column_types:
         unique_key: integer

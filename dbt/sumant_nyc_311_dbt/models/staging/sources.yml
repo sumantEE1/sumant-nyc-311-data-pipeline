@@ -2,7 +2,7 @@ version: 2
 sources:
   - name: raw
     database: DE_CROSS_SKILLING_NYC_311
-    schema: SUMANT_DEY_RAW
+    schema: SUMANT_DEY_RAW # maybe schema is not reqired here because it readss from ~/.dbt/.profile.yml
     tables:
       - name: SUMANT_DEY_RAW_NYC_311_DATA_TABLE
         columns:

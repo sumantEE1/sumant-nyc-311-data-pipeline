@@ -1,7 +1,7 @@
 version: 2
 models:
   - name: dq_311_service_requests_test
-    description: "Test model"
+    description: "This test table was created to read bad 311 service requests and test the unique_key test after partitioning by unique key and order by created date desc"
     columns:
       - name: unique_key
         data_tests:

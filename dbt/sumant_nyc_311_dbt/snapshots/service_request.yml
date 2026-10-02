@@ -1,7 +1,7 @@
 snapshots:
   - name: nyc_311_service_request_snapshot
     relation: ref('stg_311_service_requests') # source('my_source', 'my_table') or ref('my_model')
-    description: stg service request snapshot
+    description: "This snapshot is created using stg service requests"
     config:
       database: DE_CROSS_SKILLING_NYC_311
       schema: staging

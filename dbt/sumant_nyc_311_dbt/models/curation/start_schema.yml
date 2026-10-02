@@ -1,6 +1,7 @@
 version: 2
 models:
   - name: dim_311_complaint
+    description: "Create a dimension table for 311 complaints"
     config:
       contract:
         enforced: true
@@ -15,7 +16,7 @@ models:
       - name: descriptor
         data_type: varchar(200)
   - name: fct_311_service_requests
-    description: "Test fact table"
+    description: "Create a fact table for 311 service requests"
     columns:
       - name: unique_key
         data_type: varchar(200)

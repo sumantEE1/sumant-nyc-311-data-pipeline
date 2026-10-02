@@ -1,7 +1,7 @@
 version: 2
 models:
   - name: mart_311_complaint_performance
-    description: Request analytics
+    description:  "Mart 311 gives complaint performance analytics"
     config:
       contract:
         enforced: true
