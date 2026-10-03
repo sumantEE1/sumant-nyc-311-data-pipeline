@@ -10,6 +10,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
     AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth"
     _PIP_ADDITIONAL_REQUIREMENTS: ""
+    SNOWFLAKE_KEY_PATH: /opt/airflow/secrets/snowflake_rsa_key.p8
     
     GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/keys/service-account.json
     AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 
@@ -19,6 +20,9 @@ x-airflow-common: &airflow-common
     - ./plugins:/opt/airflow/plugins
     - ./include:/opt/airflow/include
     - ./keys:/opt/airflow/keys:ro
+    - ../dbt/sumant_nyc_311_dbt:/opt/airflow/dbt_project
+    - ../dbt/profiles:/opt/airflow/dbt_profiles
+    - /Users/sumant/.ssh/snowflake_rsa_key.p8:/opt/airflow/secrets/snowflake_rsa_key.p8:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     postgres:
@@ -77,6 +81,8 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    ports:
+      - "8081:8081"   # dbt docs (served by the dbt_docs_serve task; LocalExecutor runs tasks here)
     environment:
       <<: *airflow-common-env
       SNOWFLAKE_USER: ${SNOWFLAKE_USER}

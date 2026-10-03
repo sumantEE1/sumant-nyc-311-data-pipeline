@@ -23,4 +23,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-ee-india-se-data-01d41119c96e.json  
+ee-india-se-data-01d41119c96e.json
+.user.yml

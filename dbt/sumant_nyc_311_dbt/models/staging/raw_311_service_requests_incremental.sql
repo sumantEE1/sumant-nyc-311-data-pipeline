@@ -2,7 +2,8 @@
     config(
         materialized='incremental',
         unique_key='unique_key',
-        incremental_strategy='delete+insert'
+        incremental_strategy='delete+insert',
+        tags= ['daily', 'request']
     )
 }}
 with nyc_batch_1 as 

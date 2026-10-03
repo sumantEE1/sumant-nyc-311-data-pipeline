@@ -1,0 +1,15 @@
+sumant_nyc_311_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: GUSDATD-DAB70621
+      database: DE_CROSS_SKILLING_NYC_311
+      schema: SUMANT_DEY_RAW
+      role: SE_DE_PARTICIPANT
+      authenticator: SNOWFLAKE_JWT
+      auth_method: SNOWFLAKE_JWT
+      user: sumant.dey
+      warehouse: SNOWFLAKE_LEARNING_WH
+      private_key_path: "{{ env_var('SNOWFLAKE_KEY_PATH', '/Users/sumant/.ssh/snowflake_rsa_key.p8') }}"
+      threads: 1
