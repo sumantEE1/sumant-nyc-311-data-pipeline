@@ -16,3 +16,7 @@ gcloud storage cp gs://sumant_nyc311/311_service_requests_000000000001 311_servi
 started spark on terminal 
 ```pyspark```
 
+Resilient Distributed Datasets
+
+First group - |SQL and dataframe and data set api| Streaming |Machine learning| Graph X
+

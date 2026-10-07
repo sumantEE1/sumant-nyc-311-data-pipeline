@@ -25,6 +25,6 @@ terraform.rc
 
 ee-india-se-data-01d41119c96e.json
 .user.yml
-
+data/*
 311_service_requests_000000000000
 311_service_requests_000000000001
