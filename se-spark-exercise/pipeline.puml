@@ -1,0 +1,44 @@
+@startuml nyc_311_pipeline
+title NYC 311 Service Requests - PySpark Pipeline
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+start
+
+fork
+  :Read CSV;
+fork again
+  :Read JSON;
+fork again
+  :Read Parquet;
+fork again
+  :Read Text (JSON lines);
+end fork
+
+:unionByName(allowMissingColumns=True);
+:Rename columns to snake_case;
+:Drop columns with more than 80%% nulls;
+
+partition "SLA calculation" {
+  :is_open = closed_date is null;
+  :effective_closed_date = coalesce(closed_date, now);
+  :resolution_hours = (effective_closed - created) / 3600;
+  :within_sla = resolution_hours <= 72;
+}
+
+:dropDuplicates(unique_key);
+:orderBy(resolution_hours desc);
+:Add year from created_date;
+
+partition "Enrichment (Python UDF)" {
+  :analyze_resolution(resolution_description);
+  :resolution_outcome;
+  :agency_action_type;
+  :extracted_tags;
+}
+
+:Flatten tags with concat_ws(",");
+:Write CSV (overwrite, partitionBy year);
+
+stop
+@enduml
